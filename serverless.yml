@@ -12,7 +12,7 @@ provider:
 
 functions:
   scrape_table:
-    handler: scrap_table.lambda_handler
+    handler: scrap_table.lambda_handler  # Asegúrarse de que el nombre del archivo y la función coincidan
     package:
       include:
         - ./**  # Incluir todo el contenido del directorio
