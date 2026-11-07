@@ -60,7 +60,7 @@ def lambda_handler(event, context):
         })
 
   # 3. Limitar estrictamente a los 10 últimos sismos
-  rows = rows[-10:].reverse()
+  rows = rows[-10:][::-1]
 
   if not rows:
     return {
