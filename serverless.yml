@@ -16,8 +16,8 @@ functions:
     package:
       include:
         - ./**  # Incluir todo el contenido del directorio
-        events:
-        - http:
+     events:
+       - http:
           path: /scrape/table
           method: get
           cors: true
