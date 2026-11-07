@@ -1,5 +1,5 @@
 org: miguelvillenab
-service: api-web-scraping
+service: api-web-scraping_sismos
 
 provider:
   name: aws
