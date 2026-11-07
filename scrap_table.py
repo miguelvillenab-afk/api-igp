@@ -48,9 +48,11 @@ def lambda_handler(event, context):
     if api_res.status_code == 200:
       data = api_res.json()
       for item in data:
+        fecha_local = str(item.get("fecha_local"))[:10]
+        hora_local = str(item.get("hora_local")).split('T')[1][:8]
         rows.append({
-            "Fecha": str(item.get("fechaLocal", item.get("fecha", ""))),
-            "Hora": str(item.get("horaLocal", item.get("hora", ""))),
+            "Fecha": fecha_local,
+            "Hora": hora_local,
             "Magnitud": str(item.get("magnitud", "")),
             "Profundidad": str(item.get("profundidad", "")),
             "Referencia": str(item.get("referencia", "")),
@@ -58,7 +60,7 @@ def lambda_handler(event, context):
         })
 
   # 3. Limitar estrictamente a los 10 últimos sismos
-  rows = rows[-10:]
+  rows = rows[-10:].reverse()
 
   if not rows:
     return {
@@ -85,4 +87,4 @@ def lambda_handler(event, context):
     i = i + 1
 
   # Retornar el resultado como JSON
-  return {"statusCode": 200, "body": json.dumps(rows, ensure_ascii=False)}
+  return {"statusCode": 200, "body": rows}
